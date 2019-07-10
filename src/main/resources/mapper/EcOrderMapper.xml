@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dong.demo.mapper.EcOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.dong.demo.domain.EcOrder" >
+    <id column="ORDER_ID" property="orderId" jdbcType="NUMERIC" />
+    <result column="MBR_ID" property="mbrId" jdbcType="NUMERIC" />
+    <result column="SHOP_ID" property="shopId" jdbcType="NUMERIC" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="ORDER_TIME" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_STATUS" property="orderStatus" jdbcType="NUMERIC" />
+    <result column="DELIVERY_TYPE_ID" property="deliveryTypeId" jdbcType="NUMERIC" />
+    <result column="IS_INVOICE_REQUIRED" property="isInvoiceRequired" jdbcType="NUMERIC" />
+    <result column="GOODS_SUM_AMOUNT" property="goodsSumAmount" jdbcType="NUMERIC" />
+    <result column="GOODS_PROMO_AMOUNT" property="goodsPromoAmount" jdbcType="NUMERIC" />
+    <result column="DELIVERY_FEE_AMOUNT" property="deliveryFeeAmount" jdbcType="NUMERIC" />
+    <result column="IS_FREE_SHIPPING" property="isFreeShipping" jdbcType="NUMERIC" />
+    <result column="SHOP_CASH_COUPON_DIFF_AMOUNT" property="shopCashCouponDiffAmount" jdbcType="NUMERIC" />
+    <result column="SHOP_BALANCE_DIFF_AMOUNT" property="shopBalanceDiffAmount" jdbcType="NUMERIC" />
+    <result column="SHOP_CREDITS_DIFF_AMOUNT" property="shopCreditsDiffAmount" jdbcType="NUMERIC" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="NUMERIC" />
+    <result column="PAY_TYPE_ID" property="payTypeId" jdbcType="NUMERIC" />
+    <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="PAID_AMOUNT" property="paidAmount" jdbcType="NUMERIC" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="NUMERIC" />
+    <result column="RECEIVE_TIME" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="SRC_ID" property="srcId" jdbcType="NUMERIC" />
+    <result column="PAY_ID" property="payId" jdbcType="NUMERIC" />
+    <result column="P_CASH_COUPON_DIFF_AMOUNT" property="pCashCouponDiffAmount" jdbcType="NUMERIC" />
+    <result column="P_POINT_COUNT" property="pPointCount" jdbcType="NUMERIC" />
+    <result column="P_POINT_DIFF_AMOUNT" property="pPointDiffAmount" jdbcType="NUMERIC" />
+    <result column="P_BALANCE_DIFF_AMOUNT" property="pBalanceDiffAmount" jdbcType="NUMERIC" />
+    <result column="P_CREDITS_DIFF_AMOUNT" property="pCreditsDiffAmount" jdbcType="NUMERIC" />
+    <result column="P_DIFF_AMOUNT" property="pDiffAmount" jdbcType="NUMERIC" />
+    <result column="PAYABLE_AMOUNT" property="payableAmount" jdbcType="NUMERIC" />
+    <result column="IS_POINT_PRODUCED" property="isPointProduced" jdbcType="NUMERIC" />
+    <result column="POINT_PRODUCE_TIME" property="pointProduceTime" jdbcType="TIMESTAMP" />
+    <result column="IS_SYNC" property="isSync" jdbcType="NUMERIC" />
+    <result column="SAP_NO" property="sapNo" jdbcType="VARCHAR" />
+    <result column="ORDER_TYPE" property="orderType" jdbcType="NUMERIC" />
+    <result column="CASH_COUPON_ID" property="cashCouponId" jdbcType="NUMERIC" />
+    <result column="ORDER_REFUND_STATUS" property="orderRefundStatus" jdbcType="NUMERIC" />
+    <result column="PAY_EXPIRE_TIME" property="payExpireTime" jdbcType="TIMESTAMP" />
+    <result column="DISTRI_SHOP_ID" property="distriShopId" jdbcType="NUMERIC" />
+    <result column="PRODUCT_LINE_ID" property="productLineId" jdbcType="NUMERIC" />
+    <result column="ORDER_MODE" property="orderMode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORDER_ID, MBR_ID, SHOP_ID, ORDER_NO, ORDER_TIME, ORDER_STATUS, DELIVERY_TYPE_ID, 
+    IS_INVOICE_REQUIRED, GOODS_SUM_AMOUNT, GOODS_PROMO_AMOUNT, DELIVERY_FEE_AMOUNT, IS_FREE_SHIPPING, 
+    SHOP_CASH_COUPON_DIFF_AMOUNT, SHOP_BALANCE_DIFF_AMOUNT, SHOP_CREDITS_DIFF_AMOUNT, 
+    TOTAL_AMOUNT, PAY_TYPE_ID, PAY_TIME, PAID_AMOUNT, PAY_STATUS, RECEIVE_TIME, SRC_ID, 
+    PAY_ID, P_CASH_COUPON_DIFF_AMOUNT, P_POINT_COUNT, P_POINT_DIFF_AMOUNT, P_BALANCE_DIFF_AMOUNT, 
+    P_CREDITS_DIFF_AMOUNT, P_DIFF_AMOUNT, PAYABLE_AMOUNT, IS_POINT_PRODUCED, POINT_PRODUCE_TIME, 
+    IS_SYNC, SAP_NO, ORDER_TYPE, CASH_COUPON_ID, ORDER_REFUND_STATUS, PAY_EXPIRE_TIME, 
+    DISTRI_SHOP_ID, PRODUCT_LINE_ID, ORDER_MODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from EC_ORDER
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from EC_ORDER
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.dong.demo.domain.EcOrder" >
+    insert into EC_ORDER (ORDER_ID, MBR_ID, SHOP_ID, 
+      ORDER_NO, ORDER_TIME, ORDER_STATUS, 
+      DELIVERY_TYPE_ID, IS_INVOICE_REQUIRED, GOODS_SUM_AMOUNT, 
+      GOODS_PROMO_AMOUNT, DELIVERY_FEE_AMOUNT, IS_FREE_SHIPPING, 
+      SHOP_CASH_COUPON_DIFF_AMOUNT, SHOP_BALANCE_DIFF_AMOUNT, 
+      SHOP_CREDITS_DIFF_AMOUNT, TOTAL_AMOUNT, PAY_TYPE_ID, 
+      PAY_TIME, PAID_AMOUNT, PAY_STATUS, 
+      RECEIVE_TIME, SRC_ID, PAY_ID, 
+      P_CASH_COUPON_DIFF_AMOUNT, P_POINT_COUNT, P_POINT_DIFF_AMOUNT, 
+      P_BALANCE_DIFF_AMOUNT, P_CREDITS_DIFF_AMOUNT, 
+      P_DIFF_AMOUNT, PAYABLE_AMOUNT, IS_POINT_PRODUCED, 
+      POINT_PRODUCE_TIME, IS_SYNC, SAP_NO, 
+      ORDER_TYPE, CASH_COUPON_ID, ORDER_REFUND_STATUS, 
+      PAY_EXPIRE_TIME, DISTRI_SHOP_ID, PRODUCT_LINE_ID, 
+      ORDER_MODE)
+    values (#{orderId,jdbcType=NUMERIC}, #{mbrId,jdbcType=NUMERIC}, #{shopId,jdbcType=NUMERIC}, 
+      #{orderNo,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=NUMERIC}, 
+      #{deliveryTypeId,jdbcType=NUMERIC}, #{isInvoiceRequired,jdbcType=NUMERIC}, #{goodsSumAmount,jdbcType=NUMERIC}, 
+      #{goodsPromoAmount,jdbcType=NUMERIC}, #{deliveryFeeAmount,jdbcType=NUMERIC}, #{isFreeShipping,jdbcType=NUMERIC}, 
+      #{shopCashCouponDiffAmount,jdbcType=NUMERIC}, #{shopBalanceDiffAmount,jdbcType=NUMERIC}, 
+      #{shopCreditsDiffAmount,jdbcType=NUMERIC}, #{totalAmount,jdbcType=NUMERIC}, #{payTypeId,jdbcType=NUMERIC}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{paidAmount,jdbcType=NUMERIC}, #{payStatus,jdbcType=NUMERIC}, 
+      #{receiveTime,jdbcType=TIMESTAMP}, #{srcId,jdbcType=NUMERIC}, #{payId,jdbcType=NUMERIC}, 
+      #{pCashCouponDiffAmount,jdbcType=NUMERIC}, #{pPointCount,jdbcType=NUMERIC}, #{pPointDiffAmount,jdbcType=NUMERIC}, 
+      #{pBalanceDiffAmount,jdbcType=NUMERIC}, #{pCreditsDiffAmount,jdbcType=NUMERIC}, 
+      #{pDiffAmount,jdbcType=NUMERIC}, #{payableAmount,jdbcType=NUMERIC}, #{isPointProduced,jdbcType=NUMERIC}, 
+      #{pointProduceTime,jdbcType=TIMESTAMP}, #{isSync,jdbcType=NUMERIC}, #{sapNo,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=NUMERIC}, #{cashCouponId,jdbcType=NUMERIC}, #{orderRefundStatus,jdbcType=NUMERIC}, 
+      #{payExpireTime,jdbcType=TIMESTAMP}, #{distriShopId,jdbcType=NUMERIC}, #{productLineId,jdbcType=NUMERIC}, 
+      #{orderMode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dong.demo.domain.EcOrder" >
+    insert into EC_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="mbrId != null" >
+        MBR_ID,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME,
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS,
+      </if>
+      <if test="deliveryTypeId != null" >
+        DELIVERY_TYPE_ID,
+      </if>
+      <if test="isInvoiceRequired != null" >
+        IS_INVOICE_REQUIRED,
+      </if>
+      <if test="goodsSumAmount != null" >
+        GOODS_SUM_AMOUNT,
+      </if>
+      <if test="goodsPromoAmount != null" >
+        GOODS_PROMO_AMOUNT,
+      </if>
+      <if test="deliveryFeeAmount != null" >
+        DELIVERY_FEE_AMOUNT,
+      </if>
+      <if test="isFreeShipping != null" >
+        IS_FREE_SHIPPING,
+      </if>
+      <if test="shopCashCouponDiffAmount != null" >
+        SHOP_CASH_COUPON_DIFF_AMOUNT,
+      </if>
+      <if test="shopBalanceDiffAmount != null" >
+        SHOP_BALANCE_DIFF_AMOUNT,
+      </if>
+      <if test="shopCreditsDiffAmount != null" >
+        SHOP_CREDITS_DIFF_AMOUNT,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="payTypeId != null" >
+        PAY_TYPE_ID,
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
+      <if test="paidAmount != null" >
+        PAID_AMOUNT,
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS,
+      </if>
+      <if test="receiveTime != null" >
+        RECEIVE_TIME,
+      </if>
+      <if test="srcId != null" >
+        SRC_ID,
+      </if>
+      <if test="payId != null" >
+        PAY_ID,
+      </if>
+      <if test="pCashCouponDiffAmount != null" >
+        P_CASH_COUPON_DIFF_AMOUNT,
+      </if>
+      <if test="pPointCount != null" >
+        P_POINT_COUNT,
+      </if>
+      <if test="pPointDiffAmount != null" >
+        P_POINT_DIFF_AMOUNT,
+      </if>
+      <if test="pBalanceDiffAmount != null" >
+        P_BALANCE_DIFF_AMOUNT,
+      </if>
+      <if test="pCreditsDiffAmount != null" >
+        P_CREDITS_DIFF_AMOUNT,
+      </if>
+      <if test="pDiffAmount != null" >
+        P_DIFF_AMOUNT,
+      </if>
+      <if test="payableAmount != null" >
+        PAYABLE_AMOUNT,
+      </if>
+      <if test="isPointProduced != null" >
+        IS_POINT_PRODUCED,
+      </if>
+      <if test="pointProduceTime != null" >
+        POINT_PRODUCE_TIME,
+      </if>
+      <if test="isSync != null" >
+        IS_SYNC,
+      </if>
+      <if test="sapNo != null" >
+        SAP_NO,
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE,
+      </if>
+      <if test="cashCouponId != null" >
+        CASH_COUPON_ID,
+      </if>
+      <if test="orderRefundStatus != null" >
+        ORDER_REFUND_STATUS,
+      </if>
+      <if test="payExpireTime != null" >
+        PAY_EXPIRE_TIME,
+      </if>
+      <if test="distriShopId != null" >
+        DISTRI_SHOP_ID,
+      </if>
+      <if test="productLineId != null" >
+        PRODUCT_LINE_ID,
+      </if>
+      <if test="orderMode != null" >
+        ORDER_MODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=NUMERIC},
+      </if>
+      <if test="mbrId != null" >
+        #{mbrId,jdbcType=NUMERIC},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryTypeId != null" >
+        #{deliveryTypeId,jdbcType=NUMERIC},
+      </if>
+      <if test="isInvoiceRequired != null" >
+        #{isInvoiceRequired,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsSumAmount != null" >
+        #{goodsSumAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsPromoAmount != null" >
+        #{goodsPromoAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryFeeAmount != null" >
+        #{deliveryFeeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="isFreeShipping != null" >
+        #{isFreeShipping,jdbcType=NUMERIC},
+      </if>
+      <if test="shopCashCouponDiffAmount != null" >
+        #{shopCashCouponDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="shopBalanceDiffAmount != null" >
+        #{shopBalanceDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="shopCreditsDiffAmount != null" >
+        #{shopCreditsDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="payTypeId != null" >
+        #{payTypeId,jdbcType=NUMERIC},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paidAmount != null" >
+        #{paidAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="srcId != null" >
+        #{srcId,jdbcType=NUMERIC},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=NUMERIC},
+      </if>
+      <if test="pCashCouponDiffAmount != null" >
+        #{pCashCouponDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pPointCount != null" >
+        #{pPointCount,jdbcType=NUMERIC},
+      </if>
+      <if test="pPointDiffAmount != null" >
+        #{pPointDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pBalanceDiffAmount != null" >
+        #{pBalanceDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pCreditsDiffAmount != null" >
+        #{pCreditsDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pDiffAmount != null" >
+        #{pDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="payableAmount != null" >
+        #{payableAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="isPointProduced != null" >
+        #{isPointProduced,jdbcType=NUMERIC},
+      </if>
+      <if test="pointProduceTime != null" >
+        #{pointProduceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSync != null" >
+        #{isSync,jdbcType=NUMERIC},
+      </if>
+      <if test="sapNo != null" >
+        #{sapNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=NUMERIC},
+      </if>
+      <if test="cashCouponId != null" >
+        #{cashCouponId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderRefundStatus != null" >
+        #{orderRefundStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="payExpireTime != null" >
+        #{payExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="distriShopId != null" >
+        #{distriShopId,jdbcType=NUMERIC},
+      </if>
+      <if test="productLineId != null" >
+        #{productLineId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderMode != null" >
+        #{orderMode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dong.demo.domain.EcOrder" >
+    update EC_ORDER
+    <set >
+      <if test="mbrId != null" >
+        MBR_ID = #{mbrId,jdbcType=NUMERIC},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null" >
+        ORDER_STATUS = #{orderStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryTypeId != null" >
+        DELIVERY_TYPE_ID = #{deliveryTypeId,jdbcType=NUMERIC},
+      </if>
+      <if test="isInvoiceRequired != null" >
+        IS_INVOICE_REQUIRED = #{isInvoiceRequired,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsSumAmount != null" >
+        GOODS_SUM_AMOUNT = #{goodsSumAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsPromoAmount != null" >
+        GOODS_PROMO_AMOUNT = #{goodsPromoAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="deliveryFeeAmount != null" >
+        DELIVERY_FEE_AMOUNT = #{deliveryFeeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="isFreeShipping != null" >
+        IS_FREE_SHIPPING = #{isFreeShipping,jdbcType=NUMERIC},
+      </if>
+      <if test="shopCashCouponDiffAmount != null" >
+        SHOP_CASH_COUPON_DIFF_AMOUNT = #{shopCashCouponDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="shopBalanceDiffAmount != null" >
+        SHOP_BALANCE_DIFF_AMOUNT = #{shopBalanceDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="shopCreditsDiffAmount != null" >
+        SHOP_CREDITS_DIFF_AMOUNT = #{shopCreditsDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="payTypeId != null" >
+        PAY_TYPE_ID = #{payTypeId,jdbcType=NUMERIC},
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paidAmount != null" >
+        PAID_AMOUNT = #{paidAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS = #{payStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="receiveTime != null" >
+        RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="srcId != null" >
+        SRC_ID = #{srcId,jdbcType=NUMERIC},
+      </if>
+      <if test="payId != null" >
+        PAY_ID = #{payId,jdbcType=NUMERIC},
+      </if>
+      <if test="pCashCouponDiffAmount != null" >
+        P_CASH_COUPON_DIFF_AMOUNT = #{pCashCouponDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pPointCount != null" >
+        P_POINT_COUNT = #{pPointCount,jdbcType=NUMERIC},
+      </if>
+      <if test="pPointDiffAmount != null" >
+        P_POINT_DIFF_AMOUNT = #{pPointDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pBalanceDiffAmount != null" >
+        P_BALANCE_DIFF_AMOUNT = #{pBalanceDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pCreditsDiffAmount != null" >
+        P_CREDITS_DIFF_AMOUNT = #{pCreditsDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="pDiffAmount != null" >
+        P_DIFF_AMOUNT = #{pDiffAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="payableAmount != null" >
+        PAYABLE_AMOUNT = #{payableAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="isPointProduced != null" >
+        IS_POINT_PRODUCED = #{isPointProduced,jdbcType=NUMERIC},
+      </if>
+      <if test="pointProduceTime != null" >
+        POINT_PRODUCE_TIME = #{pointProduceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSync != null" >
+        IS_SYNC = #{isSync,jdbcType=NUMERIC},
+      </if>
+      <if test="sapNo != null" >
+        SAP_NO = #{sapNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        ORDER_TYPE = #{orderType,jdbcType=NUMERIC},
+      </if>
+      <if test="cashCouponId != null" >
+        CASH_COUPON_ID = #{cashCouponId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderRefundStatus != null" >
+        ORDER_REFUND_STATUS = #{orderRefundStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="payExpireTime != null" >
+        PAY_EXPIRE_TIME = #{payExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="distriShopId != null" >
+        DISTRI_SHOP_ID = #{distriShopId,jdbcType=NUMERIC},
+      </if>
+      <if test="productLineId != null" >
+        PRODUCT_LINE_ID = #{productLineId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderMode != null" >
+        ORDER_MODE = #{orderMode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dong.demo.domain.EcOrder" >
+    update EC_ORDER
+    set MBR_ID = #{mbrId,jdbcType=NUMERIC},
+      SHOP_ID = #{shopId,jdbcType=NUMERIC},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      ORDER_STATUS = #{orderStatus,jdbcType=NUMERIC},
+      DELIVERY_TYPE_ID = #{deliveryTypeId,jdbcType=NUMERIC},
+      IS_INVOICE_REQUIRED = #{isInvoiceRequired,jdbcType=NUMERIC},
+      GOODS_SUM_AMOUNT = #{goodsSumAmount,jdbcType=NUMERIC},
+      GOODS_PROMO_AMOUNT = #{goodsPromoAmount,jdbcType=NUMERIC},
+      DELIVERY_FEE_AMOUNT = #{deliveryFeeAmount,jdbcType=NUMERIC},
+      IS_FREE_SHIPPING = #{isFreeShipping,jdbcType=NUMERIC},
+      SHOP_CASH_COUPON_DIFF_AMOUNT = #{shopCashCouponDiffAmount,jdbcType=NUMERIC},
+      SHOP_BALANCE_DIFF_AMOUNT = #{shopBalanceDiffAmount,jdbcType=NUMERIC},
+      SHOP_CREDITS_DIFF_AMOUNT = #{shopCreditsDiffAmount,jdbcType=NUMERIC},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC},
+      PAY_TYPE_ID = #{payTypeId,jdbcType=NUMERIC},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      PAID_AMOUNT = #{paidAmount,jdbcType=NUMERIC},
+      PAY_STATUS = #{payStatus,jdbcType=NUMERIC},
+      RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
+      SRC_ID = #{srcId,jdbcType=NUMERIC},
+      PAY_ID = #{payId,jdbcType=NUMERIC},
+      P_CASH_COUPON_DIFF_AMOUNT = #{pCashCouponDiffAmount,jdbcType=NUMERIC},
+      P_POINT_COUNT = #{pPointCount,jdbcType=NUMERIC},
+      P_POINT_DIFF_AMOUNT = #{pPointDiffAmount,jdbcType=NUMERIC},
+      P_BALANCE_DIFF_AMOUNT = #{pBalanceDiffAmount,jdbcType=NUMERIC},
+      P_CREDITS_DIFF_AMOUNT = #{pCreditsDiffAmount,jdbcType=NUMERIC},
+      P_DIFF_AMOUNT = #{pDiffAmount,jdbcType=NUMERIC},
+      PAYABLE_AMOUNT = #{payableAmount,jdbcType=NUMERIC},
+      IS_POINT_PRODUCED = #{isPointProduced,jdbcType=NUMERIC},
+      POINT_PRODUCE_TIME = #{pointProduceTime,jdbcType=TIMESTAMP},
+      IS_SYNC = #{isSync,jdbcType=NUMERIC},
+      SAP_NO = #{sapNo,jdbcType=VARCHAR},
+      ORDER_TYPE = #{orderType,jdbcType=NUMERIC},
+      CASH_COUPON_ID = #{cashCouponId,jdbcType=NUMERIC},
+      ORDER_REFUND_STATUS = #{orderRefundStatus,jdbcType=NUMERIC},
+      PAY_EXPIRE_TIME = #{payExpireTime,jdbcType=TIMESTAMP},
+      DISTRI_SHOP_ID = #{distriShopId,jdbcType=NUMERIC},
+      PRODUCT_LINE_ID = #{productLineId,jdbcType=NUMERIC},
+      ORDER_MODE = #{orderMode,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </update>
+
+  <select id="getAreaId" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+    SELECT area_id FROM ec_area WHERE area_name = #{areaName};
+  </select>
+</mapper>

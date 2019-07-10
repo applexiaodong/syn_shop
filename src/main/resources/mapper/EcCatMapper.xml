@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dong.demo.mapper.EcCatMapper" >
+  <resultMap id="BaseResultMap" type="com.dong.demo.domain.EcCat" >
+    <id column="CAT_ID" property="catId" jdbcType="NUMERIC" />
+    <result column="PARENT_CAT_ID" property="parentCatId" jdbcType="NUMERIC" />
+    <result column="CAT_NAME" property="catName" jdbcType="VARCHAR" />
+    <result column="CAT_ID_PATH" property="catIdPath" jdbcType="VARCHAR" />
+    <result column="CAT_NAME_PATH" property="catNamePath" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="NUMERIC" />
+    <result column="IS_LEAF" property="isLeaf" jdbcType="NUMERIC" />
+    <result column="LVL" property="lvl" jdbcType="NUMERIC" />
+    <result column="BUY_TYPE" property="buyType" jdbcType="NUMERIC" />
+    <result column="is_use" property="isUse" jdbcType="NUMERIC" />
+    <result column="is_audit" property="isAudit" jdbcType="NUMERIC" />
+    <result column="create_shop_id" property="createShopId" jdbcType="NUMERIC" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CAT_ID, PARENT_CAT_ID, CAT_NAME, CAT_ID_PATH, CAT_NAME_PATH, REMARK, ORDER_NUM, IS_LEAF, 
+    LVL, BUY_TYPE, is_use, is_audit, create_shop_id, create_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from EC_CAT
+    where CAT_ID = #{catId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from EC_CAT
+    where CAT_ID = #{catId,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.dong.demo.domain.EcCat" >
+    insert into EC_CAT (CAT_ID, PARENT_CAT_ID, CAT_NAME, 
+      CAT_ID_PATH, CAT_NAME_PATH, REMARK, 
+      ORDER_NUM, IS_LEAF, LVL, 
+      BUY_TYPE, is_use, is_audit, 
+      create_shop_id, create_date)
+    values (#{catId,jdbcType=NUMERIC}, #{parentCatId,jdbcType=NUMERIC}, #{catName,jdbcType=VARCHAR}, 
+      #{catIdPath,jdbcType=VARCHAR}, #{catNamePath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=NUMERIC}, #{isLeaf,jdbcType=NUMERIC}, #{lvl,jdbcType=NUMERIC}, 
+      #{buyType,jdbcType=NUMERIC}, #{isUse,jdbcType=NUMERIC}, #{isAudit,jdbcType=NUMERIC}, 
+      #{createShopId,jdbcType=NUMERIC}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dong.demo.domain.EcCat" >
+    insert into EC_CAT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="catId != null" >
+        CAT_ID,
+      </if>
+      <if test="parentCatId != null" >
+        PARENT_CAT_ID,
+      </if>
+      <if test="catName != null" >
+        CAT_NAME,
+      </if>
+      <if test="catIdPath != null" >
+        CAT_ID_PATH,
+      </if>
+      <if test="catNamePath != null" >
+        CAT_NAME_PATH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF,
+      </if>
+      <if test="lvl != null" >
+        LVL,
+      </if>
+      <if test="buyType != null" >
+        BUY_TYPE,
+      </if>
+      <if test="isUse != null" >
+        is_use,
+      </if>
+      <if test="isAudit != null" >
+        is_audit,
+      </if>
+      <if test="createShopId != null" >
+        create_shop_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="catId != null" >
+        #{catId,jdbcType=NUMERIC},
+      </if>
+      <if test="parentCatId != null" >
+        #{parentCatId,jdbcType=NUMERIC},
+      </if>
+      <if test="catName != null" >
+        #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="catIdPath != null" >
+        #{catIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="catNamePath != null" >
+        #{catNamePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=NUMERIC},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=NUMERIC},
+      </if>
+      <if test="lvl != null" >
+        #{lvl,jdbcType=NUMERIC},
+      </if>
+      <if test="buyType != null" >
+        #{buyType,jdbcType=NUMERIC},
+      </if>
+      <if test="isUse != null" >
+        #{isUse,jdbcType=NUMERIC},
+      </if>
+      <if test="isAudit != null" >
+        #{isAudit,jdbcType=NUMERIC},
+      </if>
+      <if test="createShopId != null" >
+        #{createShopId,jdbcType=NUMERIC},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dong.demo.domain.EcCat" >
+    update EC_CAT
+    <set >
+      <if test="parentCatId != null" >
+        PARENT_CAT_ID = #{parentCatId,jdbcType=NUMERIC},
+      </if>
+      <if test="catName != null" >
+        CAT_NAME = #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="catIdPath != null" >
+        CAT_ID_PATH = #{catIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="catNamePath != null" >
+        CAT_NAME_PATH = #{catNamePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=NUMERIC},
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF = #{isLeaf,jdbcType=NUMERIC},
+      </if>
+      <if test="lvl != null" >
+        LVL = #{lvl,jdbcType=NUMERIC},
+      </if>
+      <if test="buyType != null" >
+        BUY_TYPE = #{buyType,jdbcType=NUMERIC},
+      </if>
+      <if test="isUse != null" >
+        is_use = #{isUse,jdbcType=NUMERIC},
+      </if>
+      <if test="isAudit != null" >
+        is_audit = #{isAudit,jdbcType=NUMERIC},
+      </if>
+      <if test="createShopId != null" >
+        create_shop_id = #{createShopId,jdbcType=NUMERIC},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CAT_ID = #{catId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dong.demo.domain.EcCat" >
+    update EC_CAT
+    set PARENT_CAT_ID = #{parentCatId,jdbcType=NUMERIC},
+      CAT_NAME = #{catName,jdbcType=VARCHAR},
+      CAT_ID_PATH = #{catIdPath,jdbcType=VARCHAR},
+      CAT_NAME_PATH = #{catNamePath,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ORDER_NUM = #{orderNum,jdbcType=NUMERIC},
+      IS_LEAF = #{isLeaf,jdbcType=NUMERIC},
+      LVL = #{lvl,jdbcType=NUMERIC},
+      BUY_TYPE = #{buyType,jdbcType=NUMERIC},
+      is_use = #{isUse,jdbcType=NUMERIC},
+      is_audit = #{isAudit,jdbcType=NUMERIC},
+      create_shop_id = #{createShopId,jdbcType=NUMERIC},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where CAT_ID = #{catId,jdbcType=NUMERIC}
+  </update>
+
+  <!--查询所有目录-->
+  <select id="findAllCat" resultMap="BaseResultMap">
+    select * from ec_cat
+  </select>
+</mapper>

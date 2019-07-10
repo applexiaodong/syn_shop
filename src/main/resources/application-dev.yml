@@ -1,0 +1,35 @@
+server:
+ # servlet:
+  #  context-path: /love
+  port: 8088
+
+#常量
+boy:
+  name: jack
+  age: 25
+  sex: man
+
+#端口号及地址
+# token http://114.115.156.50:8080/pishop/access_token
+# base_url: http://114.115.156.50:8080/pishop/open/provider/api.do
+address:
+  token_url: http://114.115.156.50:8080/pishop/access_token
+  base_url: http://114.115.156.50:8080/pishop/open/provider/api.do
+
+#token授权参数
+token:
+  esponse_type: token
+  client_id: xugong
+  client_secret: AcEd87cFAd
+  corp_id: 202cb962ac59075b964b07152d234b70
+#接口地址
+goods:
+  saveGoodsMethod: importGoodsInfo
+  updGoodsMethod: updateGoodsInfo
+  updGoodsPrice: updateSkuPrice
+  updGoodsStatus: updateSkuStateInfo
+  updGoodsImg: updateSkuImgInfo
+
+order:
+  getOrderNo: getOrderPushMsg
+  getOrderInfo: queryOrderInfo

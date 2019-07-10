@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.demo.mapper.EcOrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dong.demo.domain.EcOrderInfo">
+    <id column="ORDER_ID" jdbcType="NUMERIC" property="orderId" />
+    <result column="MBR_REMARK" jdbcType="VARCHAR" property="mbrRemark" />
+    <result column="INVOICE_TITLE" jdbcType="VARCHAR" property="invoiceTitle" />
+    <result column="ADDR_PROVINCE_ID" jdbcType="NUMERIC" property="addrProvinceId" />
+    <result column="ADDR_CITY_ID" jdbcType="NUMERIC" property="addrCityId" />
+    <result column="ADDR_DISTRICT_ID" jdbcType="NUMERIC" property="addrDistrictId" />
+    <result column="ADDR_POSTCODE" jdbcType="VARCHAR" property="addrPostcode" />
+    <result column="ADDR_ADDRESS" jdbcType="VARCHAR" property="addrAddress" />
+    <result column="CONTACT_NAME" jdbcType="VARCHAR" property="contactName" />
+    <result column="CONTACT_TEL" jdbcType="VARCHAR" property="contactTel" />
+    <result column="SELLER_REMARK" jdbcType="VARCHAR" property="sellerRemark" />
+    <result column="DISCOUNT_REASON" jdbcType="VARCHAR" property="discountReason" />
+    <result column="LOGI_COMPANY_ID" jdbcType="NUMERIC" property="logiCompanyId" />
+    <result column="LOGI_SN" jdbcType="VARCHAR" property="logiSn" />
+    <result column="LOGI_CONTACT" jdbcType="VARCHAR" property="logiContact" />
+    <result column="DELIVERY_TIME" jdbcType="TIMESTAMP" property="deliveryTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDER_ID, MBR_REMARK, INVOICE_TITLE, ADDR_PROVINCE_ID, ADDR_CITY_ID, ADDR_DISTRICT_ID, 
+    ADDR_POSTCODE, ADDR_ADDRESS, CONTACT_NAME, CONTACT_TEL, SELLER_REMARK, DISCOUNT_REASON, 
+    LOGI_COMPANY_ID, LOGI_SN, LOGI_CONTACT, DELIVERY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from EC_ORDER_INFO
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from EC_ORDER_INFO
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.dong.demo.domain.EcOrderInfo">
+    insert into EC_ORDER_INFO (ORDER_ID, MBR_REMARK, INVOICE_TITLE, 
+      ADDR_PROVINCE_ID, ADDR_CITY_ID, ADDR_DISTRICT_ID, 
+      ADDR_POSTCODE, ADDR_ADDRESS, CONTACT_NAME, 
+      CONTACT_TEL, SELLER_REMARK, DISCOUNT_REASON, 
+      LOGI_COMPANY_ID, LOGI_SN, LOGI_CONTACT, 
+      DELIVERY_TIME)
+    values (#{orderId,jdbcType=NUMERIC}, #{mbrRemark,jdbcType=VARCHAR}, #{invoiceTitle,jdbcType=VARCHAR}, 
+      #{addrProvinceId,jdbcType=NUMERIC}, #{addrCityId,jdbcType=NUMERIC}, #{addrDistrictId,jdbcType=NUMERIC}, 
+      #{addrPostcode,jdbcType=VARCHAR}, #{addrAddress,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, 
+      #{contactTel,jdbcType=VARCHAR}, #{sellerRemark,jdbcType=VARCHAR}, #{discountReason,jdbcType=VARCHAR}, 
+      #{logiCompanyId,jdbcType=NUMERIC}, #{logiSn,jdbcType=VARCHAR}, #{logiContact,jdbcType=VARCHAR}, 
+      #{deliveryTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dong.demo.domain.EcOrderInfo">
+    insert into EC_ORDER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="mbrRemark != null">
+        MBR_REMARK,
+      </if>
+      <if test="invoiceTitle != null">
+        INVOICE_TITLE,
+      </if>
+      <if test="addrProvinceId != null">
+        ADDR_PROVINCE_ID,
+      </if>
+      <if test="addrCityId != null">
+        ADDR_CITY_ID,
+      </if>
+      <if test="addrDistrictId != null">
+        ADDR_DISTRICT_ID,
+      </if>
+      <if test="addrPostcode != null">
+        ADDR_POSTCODE,
+      </if>
+      <if test="addrAddress != null">
+        ADDR_ADDRESS,
+      </if>
+      <if test="contactName != null">
+        CONTACT_NAME,
+      </if>
+      <if test="contactTel != null">
+        CONTACT_TEL,
+      </if>
+      <if test="sellerRemark != null">
+        SELLER_REMARK,
+      </if>
+      <if test="discountReason != null">
+        DISCOUNT_REASON,
+      </if>
+      <if test="logiCompanyId != null">
+        LOGI_COMPANY_ID,
+      </if>
+      <if test="logiSn != null">
+        LOGI_SN,
+      </if>
+      <if test="logiContact != null">
+        LOGI_CONTACT,
+      </if>
+      <if test="deliveryTime != null">
+        DELIVERY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=NUMERIC},
+      </if>
+      <if test="mbrRemark != null">
+        #{mbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null">
+        #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="addrProvinceId != null">
+        #{addrProvinceId,jdbcType=NUMERIC},
+      </if>
+      <if test="addrCityId != null">
+        #{addrCityId,jdbcType=NUMERIC},
+      </if>
+      <if test="addrDistrictId != null">
+        #{addrDistrictId,jdbcType=NUMERIC},
+      </if>
+      <if test="addrPostcode != null">
+        #{addrPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="addrAddress != null">
+        #{addrAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTel != null">
+        #{contactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerRemark != null">
+        #{sellerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="discountReason != null">
+        #{discountReason,jdbcType=VARCHAR},
+      </if>
+      <if test="logiCompanyId != null">
+        #{logiCompanyId,jdbcType=NUMERIC},
+      </if>
+      <if test="logiSn != null">
+        #{logiSn,jdbcType=VARCHAR},
+      </if>
+      <if test="logiContact != null">
+        #{logiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null">
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dong.demo.domain.EcOrderInfo">
+    update EC_ORDER_INFO
+    <set>
+      <if test="mbrRemark != null">
+        MBR_REMARK = #{mbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null">
+        INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="addrProvinceId != null">
+        ADDR_PROVINCE_ID = #{addrProvinceId,jdbcType=NUMERIC},
+      </if>
+      <if test="addrCityId != null">
+        ADDR_CITY_ID = #{addrCityId,jdbcType=NUMERIC},
+      </if>
+      <if test="addrDistrictId != null">
+        ADDR_DISTRICT_ID = #{addrDistrictId,jdbcType=NUMERIC},
+      </if>
+      <if test="addrPostcode != null">
+        ADDR_POSTCODE = #{addrPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="addrAddress != null">
+        ADDR_ADDRESS = #{addrAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTel != null">
+        CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerRemark != null">
+        SELLER_REMARK = #{sellerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="discountReason != null">
+        DISCOUNT_REASON = #{discountReason,jdbcType=VARCHAR},
+      </if>
+      <if test="logiCompanyId != null">
+        LOGI_COMPANY_ID = #{logiCompanyId,jdbcType=NUMERIC},
+      </if>
+      <if test="logiSn != null">
+        LOGI_SN = #{logiSn,jdbcType=VARCHAR},
+      </if>
+      <if test="logiContact != null">
+        LOGI_CONTACT = #{logiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null">
+        DELIVERY_TIME = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dong.demo.domain.EcOrderInfo">
+    update EC_ORDER_INFO
+    set MBR_REMARK = #{mbrRemark,jdbcType=VARCHAR},
+      INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+      ADDR_PROVINCE_ID = #{addrProvinceId,jdbcType=NUMERIC},
+      ADDR_CITY_ID = #{addrCityId,jdbcType=NUMERIC},
+      ADDR_DISTRICT_ID = #{addrDistrictId,jdbcType=NUMERIC},
+      ADDR_POSTCODE = #{addrPostcode,jdbcType=VARCHAR},
+      ADDR_ADDRESS = #{addrAddress,jdbcType=VARCHAR},
+      CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+      SELLER_REMARK = #{sellerRemark,jdbcType=VARCHAR},
+      DISCOUNT_REASON = #{discountReason,jdbcType=VARCHAR},
+      LOGI_COMPANY_ID = #{logiCompanyId,jdbcType=NUMERIC},
+      LOGI_SN = #{logiSn,jdbcType=VARCHAR},
+      LOGI_CONTACT = #{logiContact,jdbcType=VARCHAR},
+      DELIVERY_TIME = #{deliveryTime,jdbcType=TIMESTAMP}
+    where ORDER_ID = #{orderId,jdbcType=NUMERIC}
+  </update>
+</mapper>

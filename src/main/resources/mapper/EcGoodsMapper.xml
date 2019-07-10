@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dong.demo.mapper.EcGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.dong.demo.domain.EcGoods" >
+    <id column="GOODS_ID" property="goodsId" jdbcType="NUMERIC" />
+    <result column="CAT_ID" property="catId" jdbcType="NUMERIC" />
+    <result column="BRAND_ID" property="brandId" jdbcType="NUMERIC" />
+    <result column="SHOP_ID" property="shopId" jdbcType="NUMERIC" />
+    <result column="GOODS_TYPE_ID" property="goodsTypeId" jdbcType="NUMERIC" />
+    <result column="GOODS_ID_PATH" property="goodsIdPath" jdbcType="VARCHAR" />
+    <result column="CAT_ID_PATH" property="catIdPath" jdbcType="VARCHAR" />
+    <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+    <result column="MAX_PRICE" property="maxPrice" jdbcType="NUMERIC" />
+    <result column="MIN_PRICE" property="minPrice" jdbcType="NUMERIC" />
+    <result column="STOCK_QTY" property="stockQty" jdbcType="NUMERIC" />
+    <result column="DLV_TMPL_ID" property="dlvTmplId" jdbcType="NUMERIC" />
+    <result column="IS_RECOMMENDED" property="isRecommended" jdbcType="NUMERIC" />
+    <result column="IS_PLATFORM_RECOMMENDED" property="isPlatformRecommended" jdbcType="NUMERIC" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="NUMERIC" />
+    <result column="ICON_URL" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="GOODS_NO" property="goodsNo" jdbcType="VARCHAR" />
+    <result column="PROVINCE_ID" property="provinceId" jdbcType="NUMERIC" />
+    <result column="CITY_ID" property="cityId" jdbcType="NUMERIC" />
+    <result column="DISTRICT_ID" property="districtId" jdbcType="NUMERIC" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PUB_TIME" property="pubTime" jdbcType="TIMESTAMP" />
+    <result column="ST_POP" property="stPop" jdbcType="NUMERIC" />
+    <result column="ST_SALE_CNT" property="stSaleCnt" jdbcType="NUMERIC" />
+    <result column="ST_RANK" property="stRank" jdbcType="NUMERIC" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+    <result column="GOODS_STATUS" property="goodsStatus" jdbcType="NUMERIC" />
+    <result column="ST_RANK_SERVICE" property="stRankService" jdbcType="NUMERIC" />
+    <result column="PROD_YEAR" property="prodYear" jdbcType="NUMERIC" />
+    <result column="GOODS_WEIGHT" property="goodsWeight" jdbcType="NUMERIC" />
+    <result column="GOODS_VOLUMN" property="goodsVolumn" jdbcType="NUMERIC" />
+    <result column="ST_UPDATE_TIME" property="stUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="ST_SALE_MONTH_CNT" property="stSaleMonthCnt" jdbcType="NUMERIC" />
+    <result column="IS_DIVIDE" property="isDivide" jdbcType="NUMERIC" />
+    <result column="GOODS_TAG" property="goodsTag" jdbcType="VARCHAR" />
+    <result column="BUYOUT_PRICE" property="buyoutPrice" jdbcType="NUMERIC" />
+    <result column="DIPOSIT_PRICE" property="dipositPrice" jdbcType="NUMERIC" />
+    <result column="BUY_TYPE" property="buyType" jdbcType="NUMERIC" />
+    <result column="PRODUCT_LINE_ID" property="productLineId" jdbcType="NUMERIC" />
+    <result column="USED_DEGREE" property="usedDegree" jdbcType="NUMERIC" />
+    <result column="USED_YEARS" property="usedYears" jdbcType="NUMERIC" />
+    <result column="IS_RENT" property="isRent" jdbcType="NUMERIC" />
+    <result column="IS_PURCHASE" property="isPurchase" jdbcType="NUMERIC" />
+    <result column="HOURS" property="hours" jdbcType="NUMERIC" />
+    <result column="GOODS_TOP_TAG" property="goodsTopTag" jdbcType="VARCHAR" />
+    <result column="DIVIDE_COUNT" property="divideCount" jdbcType="VARCHAR" />
+    <result column="DOWN_PAYMENT" property="downPayment" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dong.demo.domain.EcGoods" extends="BaseResultMap" >
+    <result column="PART_INFO" property="partInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    GOODS_ID, CAT_ID, BRAND_ID, SHOP_ID, GOODS_TYPE_ID, GOODS_ID_PATH, CAT_ID_PATH, GOODS_NAME, 
+    MAX_PRICE, MIN_PRICE, STOCK_QTY, DLV_TMPL_ID, IS_RECOMMENDED, IS_PLATFORM_RECOMMENDED, 
+    ORDER_NUM, ICON_URL, GOODS_NO, PROVINCE_ID, CITY_ID, DISTRICT_ID, CREATE_TIME, PUB_TIME, 
+    ST_POP, ST_SALE_CNT, ST_RANK, REMARK, GOODS_STATUS, ST_RANK_SERVICE, PROD_YEAR, GOODS_WEIGHT, 
+    GOODS_VOLUMN, ST_UPDATE_TIME, ST_SALE_MONTH_CNT, IS_DIVIDE, GOODS_TAG, BUYOUT_PRICE, 
+    DIPOSIT_PRICE, BUY_TYPE, PRODUCT_LINE_ID, USED_DEGREE, USED_YEARS, IS_RENT, IS_PURCHASE, 
+    HOURS, GOODS_TOP_TAG, DIVIDE_COUNT, DOWN_PAYMENT
+  </sql>
+  <sql id="Blob_Column_List" >
+    PART_INFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from EC_GOODS
+    where GOODS_ID = #{goodsId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from EC_GOODS
+    where GOODS_ID = #{goodsId,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.dong.demo.domain.EcGoods" >
+    insert into EC_GOODS (GOODS_ID, CAT_ID, BRAND_ID, 
+      SHOP_ID, GOODS_TYPE_ID, GOODS_ID_PATH, 
+      CAT_ID_PATH, GOODS_NAME, MAX_PRICE, 
+      MIN_PRICE, STOCK_QTY, DLV_TMPL_ID, 
+      IS_RECOMMENDED, IS_PLATFORM_RECOMMENDED, ORDER_NUM, 
+      ICON_URL, GOODS_NO, PROVINCE_ID, 
+      CITY_ID, DISTRICT_ID, CREATE_TIME, 
+      PUB_TIME, ST_POP, ST_SALE_CNT, 
+      ST_RANK, REMARK, GOODS_STATUS, 
+      ST_RANK_SERVICE, PROD_YEAR, GOODS_WEIGHT, 
+      GOODS_VOLUMN, ST_UPDATE_TIME, ST_SALE_MONTH_CNT, 
+      IS_DIVIDE, GOODS_TAG, BUYOUT_PRICE, 
+      DIPOSIT_PRICE, BUY_TYPE, PRODUCT_LINE_ID, 
+      USED_DEGREE, USED_YEARS, IS_RENT, 
+      IS_PURCHASE, HOURS, GOODS_TOP_TAG, 
+      DIVIDE_COUNT, DOWN_PAYMENT, PART_INFO
+      )
+    values (#{goodsId,jdbcType=NUMERIC}, #{catId,jdbcType=NUMERIC}, #{brandId,jdbcType=NUMERIC}, 
+      #{shopId,jdbcType=NUMERIC}, #{goodsTypeId,jdbcType=NUMERIC}, #{goodsIdPath,jdbcType=VARCHAR}, 
+      #{catIdPath,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{maxPrice,jdbcType=NUMERIC}, 
+      #{minPrice,jdbcType=NUMERIC}, #{stockQty,jdbcType=NUMERIC}, #{dlvTmplId,jdbcType=NUMERIC}, 
+      #{isRecommended,jdbcType=NUMERIC}, #{isPlatformRecommended,jdbcType=NUMERIC}, #{orderNum,jdbcType=NUMERIC}, 
+      #{iconUrl,jdbcType=VARCHAR}, #{goodsNo,jdbcType=VARCHAR}, #{provinceId,jdbcType=NUMERIC}, 
+      #{cityId,jdbcType=NUMERIC}, #{districtId,jdbcType=NUMERIC}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{pubTime,jdbcType=TIMESTAMP}, #{stPop,jdbcType=NUMERIC}, #{stSaleCnt,jdbcType=NUMERIC}, 
+      #{stRank,jdbcType=NUMERIC}, #{remark,jdbcType=NVARCHAR}, #{goodsStatus,jdbcType=NUMERIC}, 
+      #{stRankService,jdbcType=NUMERIC}, #{prodYear,jdbcType=NUMERIC}, #{goodsWeight,jdbcType=NUMERIC}, 
+      #{goodsVolumn,jdbcType=NUMERIC}, #{stUpdateTime,jdbcType=TIMESTAMP}, #{stSaleMonthCnt,jdbcType=NUMERIC}, 
+      #{isDivide,jdbcType=NUMERIC}, #{goodsTag,jdbcType=VARCHAR}, #{buyoutPrice,jdbcType=NUMERIC}, 
+      #{dipositPrice,jdbcType=NUMERIC}, #{buyType,jdbcType=NUMERIC}, #{productLineId,jdbcType=NUMERIC}, 
+      #{usedDegree,jdbcType=NUMERIC}, #{usedYears,jdbcType=NUMERIC}, #{isRent,jdbcType=NUMERIC}, 
+      #{isPurchase,jdbcType=NUMERIC}, #{hours,jdbcType=NUMERIC}, #{goodsTopTag,jdbcType=VARCHAR}, 
+      #{divideCount,jdbcType=VARCHAR}, #{downPayment,jdbcType=VARCHAR}, #{partInfo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dong.demo.domain.EcGoods" >
+    insert into EC_GOODS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        GOODS_ID,
+      </if>
+      <if test="catId != null" >
+        CAT_ID,
+      </if>
+      <if test="brandId != null" >
+        BRAND_ID,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="goodsTypeId != null" >
+        GOODS_TYPE_ID,
+      </if>
+      <if test="goodsIdPath != null" >
+        GOODS_ID_PATH,
+      </if>
+      <if test="catIdPath != null" >
+        CAT_ID_PATH,
+      </if>
+      <if test="goodsName != null" >
+        GOODS_NAME,
+      </if>
+      <if test="maxPrice != null" >
+        MAX_PRICE,
+      </if>
+      <if test="minPrice != null" >
+        MIN_PRICE,
+      </if>
+      <if test="stockQty != null" >
+        STOCK_QTY,
+      </if>
+      <if test="dlvTmplId != null" >
+        DLV_TMPL_ID,
+      </if>
+      <if test="isRecommended != null" >
+        IS_RECOMMENDED,
+      </if>
+      <if test="isPlatformRecommended != null" >
+        IS_PLATFORM_RECOMMENDED,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="iconUrl != null" >
+        ICON_URL,
+      </if>
+      <if test="goodsNo != null" >
+        GOODS_NO,
+      </if>
+      <if test="provinceId != null" >
+        PROVINCE_ID,
+      </if>
+      <if test="cityId != null" >
+        CITY_ID,
+      </if>
+      <if test="districtId != null" >
+        DISTRICT_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="pubTime != null" >
+        PUB_TIME,
+      </if>
+      <if test="stPop != null" >
+        ST_POP,
+      </if>
+      <if test="stSaleCnt != null" >
+        ST_SALE_CNT,
+      </if>
+      <if test="stRank != null" >
+        ST_RANK,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="goodsStatus != null" >
+        GOODS_STATUS,
+      </if>
+      <if test="stRankService != null" >
+        ST_RANK_SERVICE,
+      </if>
+      <if test="prodYear != null" >
+        PROD_YEAR,
+      </if>
+      <if test="goodsWeight != null" >
+        GOODS_WEIGHT,
+      </if>
+      <if test="goodsVolumn != null" >
+        GOODS_VOLUMN,
+      </if>
+      <if test="stUpdateTime != null" >
+        ST_UPDATE_TIME,
+      </if>
+      <if test="stSaleMonthCnt != null" >
+        ST_SALE_MONTH_CNT,
+      </if>
+      <if test="isDivide != null" >
+        IS_DIVIDE,
+      </if>
+      <if test="goodsTag != null" >
+        GOODS_TAG,
+      </if>
+      <if test="buyoutPrice != null" >
+        BUYOUT_PRICE,
+      </if>
+      <if test="dipositPrice != null" >
+        DIPOSIT_PRICE,
+      </if>
+      <if test="buyType != null" >
+        BUY_TYPE,
+      </if>
+      <if test="productLineId != null" >
+        PRODUCT_LINE_ID,
+      </if>
+      <if test="usedDegree != null" >
+        USED_DEGREE,
+      </if>
+      <if test="usedYears != null" >
+        USED_YEARS,
+      </if>
+      <if test="isRent != null" >
+        IS_RENT,
+      </if>
+      <if test="isPurchase != null" >
+        IS_PURCHASE,
+      </if>
+      <if test="hours != null" >
+        HOURS,
+      </if>
+      <if test="goodsTopTag != null" >
+        GOODS_TOP_TAG,
+      </if>
+      <if test="divideCount != null" >
+        DIVIDE_COUNT,
+      </if>
+      <if test="downPayment != null" >
+        DOWN_PAYMENT,
+      </if>
+      <if test="partInfo != null" >
+        PART_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=NUMERIC},
+      </if>
+      <if test="catId != null" >
+        #{catId,jdbcType=NUMERIC},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=NUMERIC},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsTypeId != null" >
+        #{goodsTypeId,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsIdPath != null" >
+        #{goodsIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="catIdPath != null" >
+        #{catIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="maxPrice != null" >
+        #{maxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="minPrice != null" >
+        #{minPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="stockQty != null" >
+        #{stockQty,jdbcType=NUMERIC},
+      </if>
+      <if test="dlvTmplId != null" >
+        #{dlvTmplId,jdbcType=NUMERIC},
+      </if>
+      <if test="isRecommended != null" >
+        #{isRecommended,jdbcType=NUMERIC},
+      </if>
+      <if test="isPlatformRecommended != null" >
+        #{isPlatformRecommended,jdbcType=NUMERIC},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=NUMERIC},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNo != null" >
+        #{goodsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=NUMERIC},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=NUMERIC},
+      </if>
+      <if test="districtId != null" >
+        #{districtId,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubTime != null" >
+        #{pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stPop != null" >
+        #{stPop,jdbcType=NUMERIC},
+      </if>
+      <if test="stSaleCnt != null" >
+        #{stSaleCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="stRank != null" >
+        #{stRank,jdbcType=NUMERIC},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="goodsStatus != null" >
+        #{goodsStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="stRankService != null" >
+        #{stRankService,jdbcType=NUMERIC},
+      </if>
+      <if test="prodYear != null" >
+        #{prodYear,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsWeight != null" >
+        #{goodsWeight,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsVolumn != null" >
+        #{goodsVolumn,jdbcType=NUMERIC},
+      </if>
+      <if test="stUpdateTime != null" >
+        #{stUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stSaleMonthCnt != null" >
+        #{stSaleMonthCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="isDivide != null" >
+        #{isDivide,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsTag != null" >
+        #{goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="buyoutPrice != null" >
+        #{buyoutPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="dipositPrice != null" >
+        #{dipositPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="buyType != null" >
+        #{buyType,jdbcType=NUMERIC},
+      </if>
+      <if test="productLineId != null" >
+        #{productLineId,jdbcType=NUMERIC},
+      </if>
+      <if test="usedDegree != null" >
+        #{usedDegree,jdbcType=NUMERIC},
+      </if>
+      <if test="usedYears != null" >
+        #{usedYears,jdbcType=NUMERIC},
+      </if>
+      <if test="isRent != null" >
+        #{isRent,jdbcType=NUMERIC},
+      </if>
+      <if test="isPurchase != null" >
+        #{isPurchase,jdbcType=NUMERIC},
+      </if>
+      <if test="hours != null" >
+        #{hours,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsTopTag != null" >
+        #{goodsTopTag,jdbcType=VARCHAR},
+      </if>
+      <if test="divideCount != null" >
+        #{divideCount,jdbcType=VARCHAR},
+      </if>
+      <if test="downPayment != null" >
+        #{downPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="partInfo != null" >
+        #{partInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dong.demo.domain.EcGoods" >
+    update EC_GOODS
+    <set >
+      <if test="catId != null" >
+        CAT_ID = #{catId,jdbcType=NUMERIC},
+      </if>
+      <if test="brandId != null" >
+        BRAND_ID = #{brandId,jdbcType=NUMERIC},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsTypeId != null" >
+        GOODS_TYPE_ID = #{goodsTypeId,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsIdPath != null" >
+        GOODS_ID_PATH = #{goodsIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="catIdPath != null" >
+        CAT_ID_PATH = #{catIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="maxPrice != null" >
+        MAX_PRICE = #{maxPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="minPrice != null" >
+        MIN_PRICE = #{minPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="stockQty != null" >
+        STOCK_QTY = #{stockQty,jdbcType=NUMERIC},
+      </if>
+      <if test="dlvTmplId != null" >
+        DLV_TMPL_ID = #{dlvTmplId,jdbcType=NUMERIC},
+      </if>
+      <if test="isRecommended != null" >
+        IS_RECOMMENDED = #{isRecommended,jdbcType=NUMERIC},
+      </if>
+      <if test="isPlatformRecommended != null" >
+        IS_PLATFORM_RECOMMENDED = #{isPlatformRecommended,jdbcType=NUMERIC},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=NUMERIC},
+      </if>
+      <if test="iconUrl != null" >
+        ICON_URL = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNo != null" >
+        GOODS_NO = #{goodsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        PROVINCE_ID = #{provinceId,jdbcType=NUMERIC},
+      </if>
+      <if test="cityId != null" >
+        CITY_ID = #{cityId,jdbcType=NUMERIC},
+      </if>
+      <if test="districtId != null" >
+        DISTRICT_ID = #{districtId,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubTime != null" >
+        PUB_TIME = #{pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stPop != null" >
+        ST_POP = #{stPop,jdbcType=NUMERIC},
+      </if>
+      <if test="stSaleCnt != null" >
+        ST_SALE_CNT = #{stSaleCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="stRank != null" >
+        ST_RANK = #{stRank,jdbcType=NUMERIC},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="goodsStatus != null" >
+        GOODS_STATUS = #{goodsStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="stRankService != null" >
+        ST_RANK_SERVICE = #{stRankService,jdbcType=NUMERIC},
+      </if>
+      <if test="prodYear != null" >
+        PROD_YEAR = #{prodYear,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsWeight != null" >
+        GOODS_WEIGHT = #{goodsWeight,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsVolumn != null" >
+        GOODS_VOLUMN = #{goodsVolumn,jdbcType=NUMERIC},
+      </if>
+      <if test="stUpdateTime != null" >
+        ST_UPDATE_TIME = #{stUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stSaleMonthCnt != null" >
+        ST_SALE_MONTH_CNT = #{stSaleMonthCnt,jdbcType=NUMERIC},
+      </if>
+      <if test="isDivide != null" >
+        IS_DIVIDE = #{isDivide,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsTag != null" >
+        GOODS_TAG = #{goodsTag,jdbcType=VARCHAR},
+      </if>
+      <if test="buyoutPrice != null" >
+        BUYOUT_PRICE = #{buyoutPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="dipositPrice != null" >
+        DIPOSIT_PRICE = #{dipositPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="buyType != null" >
+        BUY_TYPE = #{buyType,jdbcType=NUMERIC},
+      </if>
+      <if test="productLineId != null" >
+        PRODUCT_LINE_ID = #{productLineId,jdbcType=NUMERIC},
+      </if>
+      <if test="usedDegree != null" >
+        USED_DEGREE = #{usedDegree,jdbcType=NUMERIC},
+      </if>
+      <if test="usedYears != null" >
+        USED_YEARS = #{usedYears,jdbcType=NUMERIC},
+      </if>
+      <if test="isRent != null" >
+        IS_RENT = #{isRent,jdbcType=NUMERIC},
+      </if>
+      <if test="isPurchase != null" >
+        IS_PURCHASE = #{isPurchase,jdbcType=NUMERIC},
+      </if>
+      <if test="hours != null" >
+        HOURS = #{hours,jdbcType=NUMERIC},
+      </if>
+      <if test="goodsTopTag != null" >
+        GOODS_TOP_TAG = #{goodsTopTag,jdbcType=VARCHAR},
+      </if>
+      <if test="divideCount != null" >
+        DIVIDE_COUNT = #{divideCount,jdbcType=VARCHAR},
+      </if>
+      <if test="downPayment != null" >
+        DOWN_PAYMENT = #{downPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="partInfo != null" >
+        PART_INFO = #{partInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where GOODS_ID = #{goodsId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dong.demo.domain.EcGoods" >
+    update EC_GOODS
+    set CAT_ID = #{catId,jdbcType=NUMERIC},
+      BRAND_ID = #{brandId,jdbcType=NUMERIC},
+      SHOP_ID = #{shopId,jdbcType=NUMERIC},
+      GOODS_TYPE_ID = #{goodsTypeId,jdbcType=NUMERIC},
+      GOODS_ID_PATH = #{goodsIdPath,jdbcType=VARCHAR},
+      CAT_ID_PATH = #{catIdPath,jdbcType=VARCHAR},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      MAX_PRICE = #{maxPrice,jdbcType=NUMERIC},
+      MIN_PRICE = #{minPrice,jdbcType=NUMERIC},
+      STOCK_QTY = #{stockQty,jdbcType=NUMERIC},
+      DLV_TMPL_ID = #{dlvTmplId,jdbcType=NUMERIC},
+      IS_RECOMMENDED = #{isRecommended,jdbcType=NUMERIC},
+      IS_PLATFORM_RECOMMENDED = #{isPlatformRecommended,jdbcType=NUMERIC},
+      ORDER_NUM = #{orderNum,jdbcType=NUMERIC},
+      ICON_URL = #{iconUrl,jdbcType=VARCHAR},
+      GOODS_NO = #{goodsNo,jdbcType=VARCHAR},
+      PROVINCE_ID = #{provinceId,jdbcType=NUMERIC},
+      CITY_ID = #{cityId,jdbcType=NUMERIC},
+      DISTRICT_ID = #{districtId,jdbcType=NUMERIC},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      PUB_TIME = #{pubTime,jdbcType=TIMESTAMP},
+      ST_POP = #{stPop,jdbcType=NUMERIC},
+      ST_SALE_CNT = #{stSaleCnt,jdbcType=NUMERIC},
+      ST_RANK = #{stRank,jdbcType=NUMERIC},
+      REMARK = #{remark,jdbcType=NVARCHAR},
+      GOODS_STATUS = #{goodsStatus,jdbcType=NUMERIC},
+      ST_RANK_SERVICE = #{stRankService,jdbcType=NUMERIC},
+      PROD_YEAR = #{prodYear,jdbcType=NUMERIC},
+      GOODS_WEIGHT = #{goodsWeight,jdbcType=NUMERIC},
+      GOODS_VOLUMN = #{goodsVolumn,jdbcType=NUMERIC},
+      ST_UPDATE_TIME = #{stUpdateTime,jdbcType=TIMESTAMP},
+      ST_SALE_MONTH_CNT = #{stSaleMonthCnt,jdbcType=NUMERIC},
+      IS_DIVIDE = #{isDivide,jdbcType=NUMERIC},
+      GOODS_TAG = #{goodsTag,jdbcType=VARCHAR},
+      BUYOUT_PRICE = #{buyoutPrice,jdbcType=NUMERIC},
+      DIPOSIT_PRICE = #{dipositPrice,jdbcType=NUMERIC},
+      BUY_TYPE = #{buyType,jdbcType=NUMERIC},
+      PRODUCT_LINE_ID = #{productLineId,jdbcType=NUMERIC},
+      USED_DEGREE = #{usedDegree,jdbcType=NUMERIC},
+      USED_YEARS = #{usedYears,jdbcType=NUMERIC},
+      IS_RENT = #{isRent,jdbcType=NUMERIC},
+      IS_PURCHASE = #{isPurchase,jdbcType=NUMERIC},
+      HOURS = #{hours,jdbcType=NUMERIC},
+      GOODS_TOP_TAG = #{goodsTopTag,jdbcType=VARCHAR},
+      DIVIDE_COUNT = #{divideCount,jdbcType=VARCHAR},
+      DOWN_PAYMENT = #{downPayment,jdbcType=VARCHAR},
+      PART_INFO = #{partInfo,jdbcType=LONGVARCHAR}
+    where GOODS_ID = #{goodsId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dong.demo.domain.EcGoods" >
+    update EC_GOODS
+    set CAT_ID = #{catId,jdbcType=NUMERIC},
+      BRAND_ID = #{brandId,jdbcType=NUMERIC},
+      SHOP_ID = #{shopId,jdbcType=NUMERIC},
+      GOODS_TYPE_ID = #{goodsTypeId,jdbcType=NUMERIC},
+      GOODS_ID_PATH = #{goodsIdPath,jdbcType=VARCHAR},
+      CAT_ID_PATH = #{catIdPath,jdbcType=VARCHAR},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      MAX_PRICE = #{maxPrice,jdbcType=NUMERIC},
+      MIN_PRICE = #{minPrice,jdbcType=NUMERIC},
+      STOCK_QTY = #{stockQty,jdbcType=NUMERIC},
+      DLV_TMPL_ID = #{dlvTmplId,jdbcType=NUMERIC},
+      IS_RECOMMENDED = #{isRecommended,jdbcType=NUMERIC},
+      IS_PLATFORM_RECOMMENDED = #{isPlatformRecommended,jdbcType=NUMERIC},
+      ORDER_NUM = #{orderNum,jdbcType=NUMERIC},
+      ICON_URL = #{iconUrl,jdbcType=VARCHAR},
+      GOODS_NO = #{goodsNo,jdbcType=VARCHAR},
+      PROVINCE_ID = #{provinceId,jdbcType=NUMERIC},
+      CITY_ID = #{cityId,jdbcType=NUMERIC},
+      DISTRICT_ID = #{districtId,jdbcType=NUMERIC},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      PUB_TIME = #{pubTime,jdbcType=TIMESTAMP},
+      ST_POP = #{stPop,jdbcType=NUMERIC},
+      ST_SALE_CNT = #{stSaleCnt,jdbcType=NUMERIC},
+      ST_RANK = #{stRank,jdbcType=NUMERIC},
+      REMARK = #{remark,jdbcType=NVARCHAR},
+      GOODS_STATUS = #{goodsStatus,jdbcType=NUMERIC},
+      ST_RANK_SERVICE = #{stRankService,jdbcType=NUMERIC},
+      PROD_YEAR = #{prodYear,jdbcType=NUMERIC},
+      GOODS_WEIGHT = #{goodsWeight,jdbcType=NUMERIC},
+      GOODS_VOLUMN = #{goodsVolumn,jdbcType=NUMERIC},
+      ST_UPDATE_TIME = #{stUpdateTime,jdbcType=TIMESTAMP},
+      ST_SALE_MONTH_CNT = #{stSaleMonthCnt,jdbcType=NUMERIC},
+      IS_DIVIDE = #{isDivide,jdbcType=NUMERIC},
+      GOODS_TAG = #{goodsTag,jdbcType=VARCHAR},
+      BUYOUT_PRICE = #{buyoutPrice,jdbcType=NUMERIC},
+      DIPOSIT_PRICE = #{dipositPrice,jdbcType=NUMERIC},
+      BUY_TYPE = #{buyType,jdbcType=NUMERIC},
+      PRODUCT_LINE_ID = #{productLineId,jdbcType=NUMERIC},
+      USED_DEGREE = #{usedDegree,jdbcType=NUMERIC},
+      USED_YEARS = #{usedYears,jdbcType=NUMERIC},
+      IS_RENT = #{isRent,jdbcType=NUMERIC},
+      IS_PURCHASE = #{isPurchase,jdbcType=NUMERIC},
+      HOURS = #{hours,jdbcType=NUMERIC},
+      GOODS_TOP_TAG = #{goodsTopTag,jdbcType=VARCHAR},
+      DIVIDE_COUNT = #{divideCount,jdbcType=VARCHAR},
+      DOWN_PAYMENT = #{downPayment,jdbcType=VARCHAR}
+    where GOODS_ID = #{goodsId,jdbcType=NUMERIC}
+  </update>
+
+  <!--查询所有商品-->
+  <select id="findAllGoods" resultType="map">
+    SELECT
+      T1.GOODS_ID AS goodsId,
+      T1.CAT_ID AS categoryCode,
+      T5.CAT_NAME AS categoryName,
+      T8.BRAND_ID AS brandId,
+      T8.BRAND_NAME AS brandCn,
+      T8.BRAND_NAME_EN AS brandEn,
+      T1.SHOP_ID AS shopId,
+      T6.SHOP_NAME AS shopName,
+      T1.GOODS_NAME AS goodsName,
+      T1.GOODS_NO AS goodsNo,
+      T1.ORDER_NUM AS sort,
+      T1.IS_RECOMMENDED AS isRecommend,
+      CASE T1.GOODS_STATUS
+               WHEN 20 THEN '1'
+               WHEN -20 THEN '0'
+      END AS state,
+      T2.AREA_NAME+'/'+ T3.AREA_NAME + '/' + T4.AREA_NAME AS goodsArea,
+      CONVERT (VARCHAR (10),T1.CREATE_TIME,120) AS createTime,
+      T7.SKU_ID AS skuId,
+      T7.SKU_NAME AS skuName,
+      T7.SKU_NO AS skuNo
+  FROM
+      ec_goods T1
+  LEFT JOIN ec_area T2 ON T1.province_id = T2.area_id
+  LEFT JOIN ec_area T3 ON T1.city_id = T3.area_id
+  LEFT JOIN ec_area T4 ON T1.district_id = T4.area_id
+  LEFT JOIN EC_CAT T5 ON T1.CAT_ID = T5.CAT_ID
+  LEFT JOIN EC_SHOP T6 ON T1.SHOP_ID = T6.SHOP_ID
+  LEFT JOIN EC_GOODS_SKU T7 ON T1.GOODS_ID = T7.GOODS_ID
+  LEFT JOIN EC_BRAND T8 ON T1.BRAND_ID = T8.BRAND_ID
+  WHERE
+    1=1
+    <if test="goodsId !=null">
+      T1.goods_id = #{goodsId}
+    </if>
+  ORDER BY
+      T1.create_time DESC
+  </select>
+
+  <!--查询单一商品-->
+  <select id="selectSingleGoodsByCondition" resultType="map"
+          parameterType="com.dong.demo.domain.EcGoods">
+    select * from ec_goods where goods_id = #{goodsId}
+  </select>
+
+  <!--查询商品属性-->
+  <select id="selectGoodsProp" resultType="map"
+          parameterType="com.dong.demo.domain.EcGoods">
+      SELECT
+          T1.GOODS_ID AS goodsId,
+          T1.GOODS_PROP_ID AS goodsPropId,
+          T1.GOODS_PROP_NAME AS goodsPropName,
+          T2.GOODS_PROP_VALUE_ID AS goodsPropValueId,
+          T2.GOODS_PROP_VALUE_TEXT AS goodsPropValueText
+      FROM
+          EC_GOODS_PROP T1
+      LEFT JOIN EC_GOODS_PROP_VALUE T2 ON T1.GOODS_PROP_ID = T2.GOODS_PROP_ID
+      WHERE
+        T1.GOODS_ID = #{goodsId}
+  </select>
+
+  <!--根据商品id查询商品信息-->
+  <select id="selectGoodsSkuByGoodsId" resultType="map" parameterType="java.math.BigDecimal">
+    SELECT
+      T1.SKU_ID AS sku,
+      T1.GOODS_ID AS goodsId,
+      T1.SKU_NAME+'（'+T1.SKU_PROP_TEXT_LIST+'）' AS name,
+      T1.SKU_PROP_ID_LIST AS propId,
+      T1.SKU_PRICE AS price,
+      T1.SKU_PRICE AS marketPrice,
+      '0.13' AS taxRate,
+      T1.SKU_PRICE*0.13 AS taxPrice,
+      T1.SKU_PRICE*(1-0.13) AS nakedPrice,
+      T1.SKU_STOCK_QTY AS sku_stock_qty,
+      T1.SKU_WEIGHT AS weight,
+      1 AS minBuyNum,
+      T2.ORDER_NUM AS sort,
+      T2.IS_RECOMMENDED AS recommended,
+      CASE T2.GOODS_STATUS
+      WHEN '20' THEN '1'
+      WHEN '-20' THEN '0'
+      END AS state,
+      T2.CAT_ID AS categoryCode,
+      T3.CAT_NAME AS categoryName,
+      T2.BRAND_ID AS brandId,
+      T4.BRAND_NAME AS brandCn,
+      T4.BRAND_NAME_EN AS brandEn,
+      T2.REMARK AS details,
+      '0' AS salLimitState
+  FROM
+      EC_GOODS_SKU T1
+  LEFT JOIN EC_GOODS T2 ON T1.GOODS_ID = T2.GOODS_ID
+  LEFT JOIN EC_CAT T3 ON T2.CAT_ID = T3.CAT_ID
+  LEFT JOIN EC_BRAND T4 ON T2.BRAND_ID = T4.BRAND_ID
+  WHERE
+    1=1
+    and T1.GOODS_ID = #{goodsId};
+  </select>
+
+    <!--查询商品图片信息-->
+    <select id="selectGoodsImageInfo" resultType="map"
+            parameterType="java.math.BigDecimal">
+        SELECT
+            goods_id AS goodsId,
+            'http://shop.xcmgmall.com/upload/' + ICON_URL AS path,
+            1 AS isPrimary,
+            1 AS orderSort,
+            'http://shop.xcmgmall.com/upload/' + ICON_URL AS listImgPath,
+            'http://shop.xcmgmall.com/upload/' + ICON_URL	AS smallImgPath,
+            'http://shop.xcmgmall.com/upload/' + ICON_URL AS bigImgPath
+        FROM
+            EC_GOODS
+        WHERE
+            GOODS_ID = #{goodsId}
+
+        UNION
+
+        SELECT
+            T1.GOODS_ID AS goodsId,
+            'http://shop.xcmgmall.com/upload/' + T2.pic AS path,
+            0 AS isPrimary,
+            ROW_NUMBER() OVER (ORDER BY GetDate())+1 AS orderSort,
+            'http://shop.xcmgmall.com/upload/' + T2.pic AS listImgPath,
+            'http://shop.xcmgmall.com/upload/' + T2.pic	AS smallImgPath,
+            'http://shop.xcmgmall.com/upload/' + T2.pic AS bigImgPath
+        FROM
+            (SELECT
+            GOODS_ID,
+            GOODS_PIC_LIST =<![CDATA[ CONVERT(xml,'<root><pic>' + REPLACE(GOODS_PIC_LIST, ',', '</pic><pic>') + '</pic></root>')]]>
+            FROM
+            EC_GOODS_INFO
+            WHERE
+            GOODS_ID = #{goodsId}
+            ) T1 OUTER APPLY
+            (SELECT pic = N.k.value('.', 'varchar(100)') FROM T1.GOODS_PIC_LIST.nodes('/root/pic') N(k)) T2
+        ORDER BY orderSort
+
+  </select>
+
+    <!--根据目录id查询目录路径-->
+    <select id="selectCatPathById" parameterType="java.math.BigDecimal" resultType="java.lang.String">
+        SELECT
+            cat_id_path
+        FROM
+            EC_CAT
+        WHERE
+            CAT_ID = #{catId}
+    </select>
+
+  <!--调用存储过程生成订单id和编号-->
+  <select id="generateOrderKey" resultType="map" parameterType="java.lang.String">
+        DECLARE @return_value1 int,@return_value2 NVARCHAR(100)
+
+        EXEC UP_COMM_BUSS_PK_CREATE #{tableName},1,1,@return_value1 output,@return_value2 output,1
+
+        SELECT @return_value1 as 'orderId',@return_value2 as 'orderNo'
+  </select>
+
+</mapper>
