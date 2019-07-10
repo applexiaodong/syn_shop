@@ -25,7 +25,7 @@ public class HelloController {
     @RequestMapping(value = "/hello/{id}",method = RequestMethod.GET)
     public String hello(@PathVariable(name = "id",required = true) Integer id){
 
-        return "亲爱的"+boy.getName()+"，今年"+boy.getAge()+"岁，性别:"+boy.getSex()+",编号："+id;
+        return "亲爱的"+boy.getName()+"，今年"+boy.getAge()+"岁，性别:"+boy.getSex()+",编号："+id+",I am Happy";
     }
 
     @RequestMapping(value = "/look",method = RequestMethod.GET)
