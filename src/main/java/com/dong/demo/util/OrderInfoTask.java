@@ -19,7 +19,7 @@ import java.util.*;
  * @author: wangxd
  * @create: 2019-07-02
  **/
-@Component
+//@Component
 public class OrderInfoTask {
     //日志
     private static Logger logger = LoggerFactory.getLogger(OrderInfoTask.class);
@@ -43,7 +43,7 @@ public class OrderInfoTask {
     //定义任务每23小时执行一次
 //    @Scheduled(cron = "0 0 0-23 * * ? ")
     //每隔十分钟，启动后不执行
-    @Scheduled(cron = "0 0/1 * * * ? ")
+//    @Scheduled(cron = "0 0/1 * * * ? ")
     public void getAccessToken(){
         //1、获取消息队列中信息
         Map<String,Object> orderParam = new Hashtable<>();

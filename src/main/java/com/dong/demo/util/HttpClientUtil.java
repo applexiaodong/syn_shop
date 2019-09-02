@@ -11,6 +11,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -60,22 +62,24 @@ public class HttpClientUtil {
         Set<String> keySet = map.keySet();
         for (String key : keySet) {
             Object val = map.get(key);
-            paramPairs.add(new BasicNameValuePair(key, val.toString()));
+            if (null != val){
+                paramPairs.add(new BasicNameValuePair(key, val.toString()));
+            }
         }
         UrlEncodedFormEntity entity;
+
+        //4、创建json格式
         try {
             entity = new UrlEncodedFormEntity(paramPairs,"UTF-8");
             httpPost.setEntity(entity);
+            String requestString = JSON.toJSONString(object);
+            logger.info("请求内容为:" + requestString);
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // 4、创建参数
-//        String jsonString = JSON.toJSONString(object);
-//        StringEntity entity = new StringEntity(jsonString,"UTF-8");
-////        entity.setContentEncoding("UTF-8");
-////        entity.setContentType("application/json");
-//        httpPost.setEntity(entity);
         // 5、响应模型
         CloseableHttpResponse response = null;
         try {
@@ -84,20 +88,20 @@ public class HttpClientUtil {
             response = httpClient.execute(httpPost);
             // 5、从响应模型中获取响应实体
             HttpEntity responseEntity = response.getEntity();
-            System.out.println("响应状态为:" + response.getStatusLine());
+            logger.info("响应状态为:" + response.getStatusLine());
             int statusCode = response.getStatusLine().getStatusCode();
-            System.out.println("响应状态码为:" + statusCode);
+            logger.info("响应状态码为:" + statusCode);
             if (statusCode == 500){
                 result.setSuccess(false);
                 result.setResultMessage("内部错误");
-                System.out.println("错误内容"+responseEntity);
+                logger.error("错误内容"+responseEntity);
                 return result;
             }
             if (responseEntity != null) {
-                System.out.println("响应内容长度为:" + responseEntity.getContentLength());
+                logger.info("响应内容长度为:" + responseEntity.getContentLength());
                 //响应内容String
                 String entityString = EntityUtils.toString(responseEntity);
-                System.out.println("响应内容为:" + entityString);
+                logger.info("响应内容为:" + entityString);
 
                 /**
                  *判断返回类型result为何种类型
@@ -108,9 +112,10 @@ public class HttpClientUtil {
                 //String转为JsonObject
                 JSONObject jsonObject = JSON.parseObject(entityString);
                 Map<String,Object> resultMap = jsonObject;
-                if (null != resultMap.get("resultCode")&& resultMap.get("resultCode").equals("2002")){
+                if (null != resultMap.get("resultCode")&& !((String)resultMap.get("resultCode")).equals("0000")){
                     result.setSuccess(false);
-                    result.setResultMessage("token已过期");
+                    result.setResultCode((String)resultMap.get("resultCode"));
+                    result.setResultMessage((String) resultMap.get("resultMessage"));
                     return result;
                 }
 

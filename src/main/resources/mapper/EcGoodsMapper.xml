@@ -709,11 +709,9 @@
   <select id="selectGoodsProp" resultType="map"
           parameterType="com.dong.demo.domain.EcGoods">
       SELECT
-          T1.GOODS_ID AS goodsId,
-          T1.GOODS_PROP_ID AS goodsPropId,
-          T1.GOODS_PROP_NAME AS goodsPropName,
-          T2.GOODS_PROP_VALUE_ID AS goodsPropValueId,
-          T2.GOODS_PROP_VALUE_TEXT AS goodsPropValueText
+          T1.GOODS_PROP_ID AS param_code,
+          T1.GOODS_PROP_NAME AS param_name,
+          T2.GOODS_PROP_VALUE_TEXT AS param_value
       FROM
           EC_GOODS_PROP T1
       LEFT JOIN EC_GOODS_PROP_VALUE T2 ON T1.GOODS_PROP_ID = T2.GOODS_PROP_ID
@@ -722,33 +720,31 @@
   </select>
 
   <!--根据商品id查询商品信息-->
-  <select id="selectGoodsSkuByGoodsId" resultType="map" parameterType="java.math.BigDecimal">
+  <select id="selectGoodsSkuByGoodsId" resultType="com.dong.demo.domain.vo.EcGoodsSkuVo" parameterType="java.math.BigDecimal">
     SELECT
       T1.SKU_ID AS sku,
-      T1.GOODS_ID AS goodsId,
+    <!--CAST(T1.SKU_ID AS VARCHAR) + CAST(CEILING(RAND()*1000) AS VARCHAR)  AS sku,随机-->
       T1.SKU_NAME+'（'+T1.SKU_PROP_TEXT_LIST+'）' AS name,
-      T1.SKU_PROP_ID_LIST AS propId,
       T1.SKU_PRICE AS price,
       T1.SKU_PRICE AS marketPrice,
       '0.13' AS taxRate,
-      T1.SKU_PRICE*0.13 AS taxPrice,
-      T1.SKU_PRICE*(1-0.13) AS nakedPrice,
+      T1.SKU_PRICE/(1+0.13) AS nakedPrice,
+      T1.SKU_PRICE-T1.SKU_PRICE/(1+0.13) AS taxPrice,
       T1.SKU_STOCK_QTY AS sku_stock_qty,
       T1.SKU_WEIGHT AS weight,
       1 AS minBuyNum,
       T2.ORDER_NUM AS sort,
-      T2.IS_RECOMMENDED AS recommended,
+      T2.IS_RECOMMENDED AS recommend,
       CASE T2.GOODS_STATUS
       WHEN '20' THEN '1'
       WHEN '-20' THEN '0'
       END AS state,
       T2.CAT_ID AS categoryCode,
       T3.CAT_NAME AS categoryName,
-      T2.BRAND_ID AS brandId,
       T4.BRAND_NAME AS brandCn,
       T4.BRAND_NAME_EN AS brandEn,
       T2.REMARK AS details,
-      '0' AS salLimitState
+      0 AS salLimitState
   FROM
       EC_GOODS_SKU T1
   LEFT JOIN EC_GOODS T2 ON T1.GOODS_ID = T2.GOODS_ID
@@ -756,14 +752,13 @@
   LEFT JOIN EC_BRAND T4 ON T2.BRAND_ID = T4.BRAND_ID
   WHERE
     1=1
-    and T1.GOODS_ID = #{goodsId};
+    and T1.GOODS_ID = #{goodsId}
   </select>
 
     <!--查询商品图片信息-->
     <select id="selectGoodsImageInfo" resultType="map"
             parameterType="java.math.BigDecimal">
         SELECT
-            goods_id AS goodsId,
             'http://shop.xcmgmall.com/upload/' + ICON_URL AS path,
             1 AS isPrimary,
             1 AS orderSort,
@@ -778,7 +773,6 @@
         UNION
 
         SELECT
-            T1.GOODS_ID AS goodsId,
             'http://shop.xcmgmall.com/upload/' + T2.pic AS path,
             0 AS isPrimary,
             ROW_NUMBER() OVER (ORDER BY GetDate())+1 AS orderSort,
@@ -802,7 +796,7 @@
     <!--根据目录id查询目录路径-->
     <select id="selectCatPathById" parameterType="java.math.BigDecimal" resultType="java.lang.String">
         SELECT
-            cat_id_path
+            cat_name_path
         FROM
             EC_CAT
         WHERE

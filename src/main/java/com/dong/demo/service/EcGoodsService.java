@@ -2,6 +2,7 @@ package com.dong.demo.service;
 
 import com.dong.demo.domain.EcGoods;
 import com.dong.demo.domain.EcGoodsSku;
+import com.dong.demo.domain.vo.EcGoodsSkuVo;
 import com.github.pagehelper.Page;
 
 import java.math.BigDecimal;
@@ -17,7 +18,7 @@ public interface EcGoodsService {
     List<Map> selectSingleGoodsProp(EcGoods goods);
 
     //根据商品id查询商品sku信息
-    List<Map> selectGoodsSkuByGoodsId(BigDecimal goodsId);
+    List<EcGoodsSkuVo> selectGoodsSkuByGoodsId(BigDecimal goodsId);
 
     //根据商品id查询商品图片信息
     List<Map> selectGoodsImageInfo(BigDecimal goodsId);

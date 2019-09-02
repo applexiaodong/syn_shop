@@ -2,6 +2,7 @@ package com.dong.demo.mapper;
 
 import com.dong.demo.domain.EcCat;
 import com.dong.demo.domain.EcGoods;
+import com.dong.demo.domain.vo.EcGoodsSkuVo;
 import com.github.pagehelper.Page;
 
 import java.math.BigDecimal;
@@ -33,7 +34,7 @@ public interface EcGoodsMapper {
     List<Map> selectGoodsProp(EcGoods goods);
 
     //根据商品id查询商品sku信息集合
-    List<Map> selectGoodsSkuByGoodsId(BigDecimal goodsId);
+    List<EcGoodsSkuVo> selectGoodsSkuByGoodsId(BigDecimal goodsId);
 
     //查询商品图片信息
     List<Map> selectGoodsImageInfo(BigDecimal goodsId);

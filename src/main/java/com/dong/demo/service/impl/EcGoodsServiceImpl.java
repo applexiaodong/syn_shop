@@ -2,6 +2,7 @@ package com.dong.demo.service.impl;
 
 import com.dong.demo.domain.EcGoods;
 import com.dong.demo.domain.EcGoodsSku;
+import com.dong.demo.domain.vo.EcGoodsSkuVo;
 import com.dong.demo.mapper.EcGoodsMapper;
 import com.dong.demo.mapper.EcGoodsSkuMapper;
 import com.dong.demo.service.EcGoodsService;
@@ -38,7 +39,7 @@ public class EcGoodsServiceImpl implements EcGoodsService {
     }
 
     @Override
-    public List<Map> selectGoodsSkuByGoodsId(BigDecimal goodsId) {
+    public List<EcGoodsSkuVo> selectGoodsSkuByGoodsId(BigDecimal goodsId) {
         return ecGoodsMapper.selectGoodsSkuByGoodsId(goodsId);
     }
 

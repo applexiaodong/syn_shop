@@ -74,12 +74,4 @@ public class HelloController {
         return data;
     }
 
-    @Autowired
-    OrderInfoTask infoTask;
-
-    @GetMapping("/getAddress")
-    public BigDecimal getProvinceName(@RequestParam(defaultValue = "12") String addressCode){
-        return infoTask.transferCityAddress(addressCode,"915");
-    }
-
 }
